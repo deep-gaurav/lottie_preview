@@ -32,7 +32,9 @@ class _LottiePlayerState extends State<LottiePlayer>
         controller.forward();
       }
     });
-    controller.forward();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      controller.forward();
+    });
     super.initState();
   }
 
