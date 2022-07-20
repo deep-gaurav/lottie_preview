@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:lottie_preview/lottie_frames.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,7 +56,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 body: Center(
                   child: Lottie.memory(
-                      const Utf8Encoder().convert(controller.text)),
+                    const Utf8Encoder().convert(controller.text),
+                  ),
+                ),
+                floatingActionButton: FloatingActionButton(
+                  child: const Icon(Icons.play_arrow),
+                  onPressed: () async {
+                    var nav = Navigator.of(context);
+                    var composition = await LottieComposition.fromBytes(
+                        const Utf8Encoder().convert(controller.text));
+                    nav.push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            LottieFrames(composition: composition),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
