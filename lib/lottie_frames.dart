@@ -16,12 +16,14 @@ class LottieFrames extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Frames'),
       ),
-      body: Wrap(
+      body: GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: composition.bounds.width / composition.bounds.height,
         children: [
           ...List.generate(totalFrames, (index) => index).map(
             (e) => CustomPaint(
-              size: Size(composition.bounds.width.toDouble(),
-                  composition.bounds.height.toDouble()),
+              // size: Size(composition.bounds.width.toDouble(),
+              //     composition.bounds.height.toDouble()),
               painter: LottiePainter(drawable, e / totalFrames),
             ),
           )
