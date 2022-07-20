@@ -7,7 +7,7 @@ class LottieFrames extends StatelessWidget {
   const LottieFrames({Key? key, required this.composition}) : super(key: key);
 
   int get totalFrames =>
-      (composition.frameRate * composition.duration.inMilliseconds ~/ 1000);
+      (composition.frameRate * composition.duration.inMilliseconds) ~/ 1000;
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +16,26 @@ class LottieFrames extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Frames'),
       ),
-      body: GridView.count(
-        crossAxisCount: 3,
-        childAspectRatio: composition.bounds.width / composition.bounds.height,
+      body: Column(
         children: [
-          ...List.generate(totalFrames, (index) => index).map(
-            (e) => CustomPaint(
-              // size: Size(composition.bounds.width.toDouble(),
-              //     composition.bounds.height.toDouble()),
-              painter: LottiePainter(drawable, e / totalFrames),
+          Text(
+              "Frame Rate ${composition.frameRate} Frames $totalFrames Duration${composition.duration}"),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 3,
+              childAspectRatio:
+                  composition.bounds.width / composition.bounds.height,
+              children: [
+                ...List.generate(totalFrames, (index) => index).map(
+                  (e) => CustomPaint(
+                    // size: Size(composition.bounds.width.toDouble(),
+                    //     composition.bounds.height.toDouble()),
+                    painter: LottiePainter(drawable, e / totalFrames),
+                  ),
+                )
+              ],
             ),
-          )
+          ),
         ],
       ),
     );
