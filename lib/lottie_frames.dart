@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:lottie_preview/custom_lottie_player.dart';
 
 class LottieFrames extends StatelessWidget {
   final LottieComposition composition;
@@ -32,7 +33,10 @@ class LottieFrames extends StatelessWidget {
                     //     composition.bounds.height.toDouble()),
                     painter: LottiePainter(drawable, e / totalFrames),
                   ),
-                )
+                ),
+                LottiePlayer(
+                  composition: composition,
+                ),
               ],
             ),
           ),
